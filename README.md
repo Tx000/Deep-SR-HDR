@@ -21,6 +21,8 @@ By Xiao Tan, Huaian Chen, Kai Xu, Yi Jin, Changan Zhu
 ## Dataset Preparation Using MATLAB
 We use datasets in h5 format for faster IO speed. 
 Please unzip the [training and test datasets](https://cseweb.ucsd.edu/~viscomp/projects/SIG17HDR/) into ./dataset_select/Data
+
+Note that put all test scenes in a folder 'Test'.
   ```
   cd ./dataset_full
   run PrepareData
@@ -32,8 +34,14 @@ Note that x2 model need to load x4 model as initialization for better convergenc
   python train.py
   ```
 
-## Test
+## Test SR-HDR
   ```
   python test.py
   ```
 
+## Test HDR (full resolution)
+  ```
+  cd HDR_full_resolution
+  python test.py
+  ```
+  
