@@ -3,10 +3,8 @@ from utils import *
 import torch
 from torch.autograd import Variable
 import argparse
-import time
 import cv2
 from model import Deep_SR_HDR
-import h5py
 
 torch.cuda.set_device(0)
 
@@ -35,54 +33,6 @@ args = parser.parse_args()
 
 if not os.path.exists(args.results_dir):
     os.mkdir(args.results_dir)
-
-MU = 5000. # tunemapping parameter
-def tonemap_np(images):  # input/output 0~1
-    return np.log(1 + MU * images) / np.log(1 + MU)
-
-
-def tonemap(images):  # input/output 0~1
-    return torch.log(1.0 + MU * images) / np.log(1.0 + MU)
-
-
-GAMMA = 2.2 # LDR&HDR domain transform parameter
-def LDR2HDR(img, expo): # input/output 0~1
-    return img ** GAMMA / expo
-
-
-def arrenge(img):
-    H, W, C = img.shape
-    img_ = np.zeros(shape=(W, H, C))
-    for i in range(W):
-        for j in range(H):
-            img_[i, j, :] = img[j, i, :]
-    return img_
-
-
-def center_crop(x, image_size):
-    crop_h, crop_w = image_size
-    _, _, h, w = x.shape
-    j = int(round((h - crop_h)/2.))
-    i = int(round((w - crop_w)/2.))
-    return x[:, :, max(0,j):min(h,j+crop_h), max(0,i):min(w,i+crop_w)]
-
-
-def resize(x, scale_factor):
-    _, _, h, w = x.shape
-    x = np.transpose(np.squeeze(x), axes=(1, 2, 0))
-    x = np.clip(cv2.resize(x, dsize=(w // scale_factor, h // scale_factor), interpolation=cv2.INTER_CUBIC), 0, 1)
-    x = np.expand_dims(np.transpose(x, axes=(2, 0, 1)), axis=0)
-    return x
-
-
-def get_input(scene_dir, image_size, scale_factor):
-    hf = h5py.File(scene_dir)
-    inputs = np.array(hf.get('IN'))
-    inputs = center_crop(inputs, image_size)
-    inputs = resize(inputs, scale_factor)
-    ref_HDR = np.array(hf.get('GT'))
-    ref_HDR = center_crop(ref_HDR, image_size)
-    return inputs, ref_HDR
 
 
 scene_dirs = sorted(os.listdir(args.dataset))
