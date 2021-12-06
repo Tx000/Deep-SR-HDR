@@ -45,3 +45,17 @@ Note that x2 model need to load x4 model as initialization for better convergenc
   python test.py
   ```
   
+## Citation
+If you use Deep SR-HDR, please consider citing:
+  ```
+  @ARTICLE{9633177,
+      author={Tan, Xiao and Chen, Huaian and Xu, Kai and Jin, Yi and Zhu, Changan},
+      journal={IEEE Transactions on Multimedia}, 
+      title={Deep SR-HDR: Joint Learning of Super-Resolution and High Dynamic Range Imaging for Dynamic Scenes}, 
+      year={2021},
+      volume={},
+      number={},
+      pages={1-1},
+      doi={10.1109/TMM.2021.3132165}
+  }
+  ```
