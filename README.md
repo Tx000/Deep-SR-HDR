@@ -48,7 +48,7 @@ Note that x2 model need to load x4 model as initialization for better convergenc
 ## Citation
 If you find this code useful in your research, please consider citing:
   ```
-  @ARTICLE{9633177,
+  @ARTICLE{Deep_SR-HDR2021,
       author={Tan, Xiao and Chen, Huaian and Xu, Kai and Jin, Yi and Zhu, Changan},
       journal={IEEE Transactions on Multimedia}, 
       title={Deep SR-HDR: Joint Learning of Super-Resolution and High Dynamic Range Imaging for Dynamic Scenes}, 
