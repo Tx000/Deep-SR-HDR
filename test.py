@@ -54,14 +54,13 @@ for idx in range(nScenes):
     with torch.no_grad():
         inputs = Variable(torch.from_numpy(input_features)).cuda()
         ref = Variable(torch.from_numpy(ref_HDR)).cuda()
-
-    with torch.no_grad():
+        
         out_LR_HDR, out_HDR = sr_hdr(inputs)
         out_HDR = torch.clamp(out_HDR, 0, 1)
         out_HDR_tone = tonemap(out_HDR) * 255
 
-    out_HDR = arrenge(np.transpose(np.squeeze(out_HDR.data.cpu().numpy()), axes=(1, 2, 0)))
-    out_HDR_tone = arrenge(np.transpose(np.squeeze(out_HDR_tone.data.cpu().numpy()), axes=(1, 2, 0)))
+    out_HDR = np.transpose(np.squeeze(out_HDR.data.cpu().numpy()), axes=(2, 1, 0))
+    out_HDR_tone = np.transpose(np.squeeze(out_HDR_tone.data.cpu().numpy()), axes=(2, 1, 0))
 
     if args.use_cuda:
         torch.cuda.empty_cache()
