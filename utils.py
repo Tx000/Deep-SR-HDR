@@ -40,15 +40,6 @@ def LDR2HDR(img, expo): # input/output 0~1
     return img ** GAMMA / expo
 
 
-def arrenge(img):
-    H, W, C = img.shape
-    img_ = np.zeros(shape=(W, H, C))
-    for i in range(W):
-        for j in range(H):
-            img_[i, j, :] = img[j, i, :]
-    return img_
-
-
 def center_crop(x, image_size):
     crop_h, crop_w = image_size
     _, _, h, w = x.shape
